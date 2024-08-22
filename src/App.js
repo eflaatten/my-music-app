@@ -16,7 +16,7 @@ class App extends Component {
       loggedIn: false,
       isConnected: true,
       masterVolume: 20,
-      soundQuality: "Normal"
+      soundQuality: ""
     }
   }
 
