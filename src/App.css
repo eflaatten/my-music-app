@@ -62,7 +62,26 @@
   margin: 10px;
 }
 
+#online-card {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 400px;
+  height: 200px;
+}
 
+#master-volume-card {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 400px;
+  height: 200px;
+}
+
+#sound-quality-card {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 400px;
+  height: 200px;
+}
 
 
 

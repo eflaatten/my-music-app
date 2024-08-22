@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect() {
+export default function BasicSelect({value, onChange}) {
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -15,11 +15,13 @@ export default function BasicSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          label="Select"
+          label="Audio"
+          value={value}
+          onChange={onChange}
         >
-          <MenuItem value={10}>Low</MenuItem>
-          <MenuItem value={20}>Normal</MenuItem>
-          <MenuItem value={30}>High</MenuItem>
+          <MenuItem value="Low">Low</MenuItem>
+          <MenuItem value="Normal">Normal</MenuItem>
+          <MenuItem value="High">High</MenuItem>
         </Select>
       </FormControl>
     </Box>
