@@ -83,6 +83,8 @@
   height: 200px;
 }
 
-
+#sound-quality-card h2 {
+  gap: 10px;
+}
 
 

@@ -9,7 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function ButtonAppBar(props) {
   
-  const { loggedIn } = props
+  const { isLoggedIn, handleLogin } = props;
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -27,17 +28,16 @@ export default function ButtonAppBar(props) {
           <Typography
             display="flex"
             justifyContent="flex-start"
-            fontSize="25px" 
+            fontSize="26px"
             variant="h6" 
             component="div" 
             sx={{ flexGrow: 1 }}>
             My Music App
           </Typography>
-
+          {/* Display logout button only if isLoggedin is true*/}
+          {isLoggedIn && <Button color="inherit" onClick={handleLogin}>Logout</Button>}
         </Toolbar>
       </AppBar>
     </Box>
-  )
+  );
 }
-
-

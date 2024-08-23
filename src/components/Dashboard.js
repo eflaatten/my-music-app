@@ -5,11 +5,12 @@ import { CardActions } from '@mui/material';
 import BasicSwitches from './BasicSwitches';
 import ContinuousSlider from './ContinuousSlider';
 import BasicSelect from './BasicSelect';
+import SystemNotifications from './SystemNotifications';
 
 
 const Dashboard = (props) => {
 
-  const { isConnected, masterVolume, soundQuality, handleVolumeChange, handleToggleSwitch, handleQualityChange } = props;
+  const { isConnected, masterVolume, soundQuality, handleVolumeChange, handleToggleSwitch, handleQualityChange, handleNotification, notification } = props;
 
   return (
     <div>
@@ -22,8 +23,14 @@ const Dashboard = (props) => {
           <CardContent>
             <h2>Online Mode</h2>
             <p>Is this application connected to the internet?</p>
-            <BasicSwitches checked={isConnected} onChange={handleToggleSwitch}/>
-          </CardContent>
+            <BasicSwitches 
+              checked={isConnected} 
+              onChange={(event) => {
+                handleToggleSwitch()
+                handleNotification(isConnected ? "You are now offline!" : "You are now online!")
+              }} 
+            />
+        </CardContent>
           <CardActions>
           </CardActions>
         </Card>
@@ -36,7 +43,13 @@ const Dashboard = (props) => {
           <CardContent>
             <h2>Master Volume</h2>
             <p>Overrides all other sound settings in this application.</p>
-            <ContinuousSlider value={masterVolume} onChange={handleVolumeChange}/>
+            <ContinuousSlider 
+              value={masterVolume} 
+              onChange={(event, newValue) => {
+                handleVolumeChange(event, newValue)
+                handleNotification(newValue > 85 ? "Listening to music at a high volume could cause long-term hearing loss." : `Volume changed to ${newValue}`)
+              }} 
+            />
           </CardContent>
           <CardActions>
           </CardActions>
@@ -50,11 +63,18 @@ const Dashboard = (props) => {
           <CardContent>
             <h2>Sound Quality</h2>
             <p>Manually control the music quality in event of poor connection.</p>
-            <BasicSelect onChange={handleQualityChange}/>
+            <BasicSelect
+              value={soundQuality}
+              onChange={(event) => {
+                handleQualityChange(event)
+                handleNotification(`Quality changed to ${event.target.value}`)
+              }}
+            />
           </CardContent>
           <CardActions>
           </CardActions>
        </Card>
+
       </div>
     </div>
   )
