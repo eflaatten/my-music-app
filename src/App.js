@@ -1,77 +1,71 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import ButtonAppBar from './components/ButtonAppBar';
 import SystemNotifications from './components/SystemNotifications'
 
-class App extends Component {
-  constructor(props){
-    super(props)
-    this.handleLogin = this.handleLogin.bind(this)
-    this.handleToggleSwitch = this.handleToggleSwitch.bind(this)
-    this.handleVolumeChange = this.handleVolumeChange.bind(this)
-    this.handleQualityChange = this.handleQualityChange.bind(this)
-    this.handleNotification = this.handleNotification.bind(this)
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [isConnected, setIsConnected] = useState(true)
+  const [masterVolume, setMasterVolume] = useState(20)
+  const [soundQuality, setSoundQuality] = useState("")
+  const [notification, setNotification] = useState("")
 
-    this.state = {
-      loggedIn: false,
-      isConnected: true,
-      masterVolume: 20,
-      soundQuality: "",
-      notification: ""
-    }
+
+  // handler functions
+  const handleLogin = () => {
+    setLoggedIn(true)
   }
 
-  handleLogin = () => {
-    this.setState({loggedIn: true})
+  const handleLogout = () => {
+    setLoggedIn(false)
   }
 
-  handleToggleSwitch = () => {
-    this.setState({isConnected: !this.state.isConnected})
+  const handleToggleSwitch = () => {
+    setIsConnected(prevState => !prevState)
   }
 
-  handleVolumeChange = (e, newValue) => {
-    this.setState({masterVolume: newValue})
+  const handleVolumeChange = (e, newValue) => {
+    setMasterVolume(newValue)
   }
 
-  handleQualityChange = (e) => {
-    this.setState({soundQuality: e.target.value})
+  const handleQualityChange = (e) => {
+    setSoundQuality(e.target.value)
   }
 
-  handleNotification = (message) => {
-    this.setState({notification: message})
-
+  const handleNotification = (message) => {
+    setNotification(message)
     setTimeout(() => {
-      this.setState({notification: ""})
-    }, 3000)
+      setNotification("")
+    }, 4000)
   }
 
+  useEffect(() => {
+    console.log("current login state: ", loggedIn)
+  }, [loggedIn])
 
-  render(){
-    console.log("current login state: ", this.state.loggedIn)
-    return (
-      <div className="App">
-        <ButtonAppBar />
-        {this.state.loggedIn ?
-          <>
-          <Dashboard 
-            handleToggleSwitch={this.handleToggleSwitch}
-            handleVolumeChange={this.handleVolumeChange}
-            handleQualityChange={this.handleQualityChange}
-            masterVolume={this.state.masterVolume}
-            soundQuality={this.state.soundQuality}
-            isConnected={this.state.isConnected}
-            handleNotification={this.handleNotification}
-            notification={this.state.notification}
-          />
-          <SystemNotifications notification={this.state.notification} /> 
-        </> : (
-          <Login handleLogin={this.handleLogin} />
-        )}
-      </div> 
-    )}
-}
+  return (
+    <div className="App">
+      <ButtonAppBar isLoggedIn={loggedIn} handleLogout={handleLogout}/>
+      {loggedIn ?
+        <>
+        <Dashboard 
+          handleToggleSwitch={handleToggleSwitch}
+          handleVolumeChange={handleVolumeChange}
+          handleQualityChange={handleQualityChange}
+          masterVolume={masterVolume}
+          soundQuality={soundQuality}
+          isConnected={isConnected}
+          handleNotification={handleNotification}
+          notification={notification}
+        />
+        <SystemNotifications notification={notification} /> 
+      </> : (
+        <Login handleLogin={handleLogin} />
+      )}
+    </div> 
+  )};
 
 export default App;
 

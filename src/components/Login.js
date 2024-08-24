@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Login = (props) => {
- 
-  const { handleLogin } = props
-
+const Login = ({ handleLogin }) => {
+  const [credentials, setCredentials] = useState({username: "", password: ""}) 
+  
   return (
     <div className="login-form">
       <h1>Login</h1>

@@ -7,10 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-export default function ButtonAppBar(props) {
-  
-  const { isLoggedIn, handleLogin } = props;
-
+export default function ButtonAppBar({ isLoggedIn, handleLogout }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -34,8 +31,7 @@ export default function ButtonAppBar(props) {
             sx={{ flexGrow: 1 }}>
             My Music App
           </Typography>
-          {/* Display logout button only if isLoggedin is true*/}
-          {isLoggedIn && <Button color="inherit" onClick={handleLogin}>Logout</Button>}
+          {isLoggedIn && <Button id='logout-btn' color="inherit" onClick={handleLogout}>Logout</Button>}
         </Toolbar>
       </AppBar>
     </Box>

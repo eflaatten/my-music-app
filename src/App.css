@@ -87,4 +87,10 @@
   gap: 10px;
 }
 
+#logout-btn {
+  color: white;
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
 

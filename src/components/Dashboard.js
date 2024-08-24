@@ -1,16 +1,22 @@
-import React from 'react';
-import { Card } from '@mui/material';
-import { CardContent } from '@mui/material';
-import { CardActions } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, CardActions } from '@mui/material';
 import BasicSwitches from './BasicSwitches';
 import ContinuousSlider from './ContinuousSlider';
 import BasicSelect from './BasicSelect';
 import SystemNotifications from './SystemNotifications';
 
 
-const Dashboard = (props) => {
+const Dashboard = ({
+  isConnected,
+  masterVolume,
+  soundQuality,
+  handleVolumeChange,
+  handleToggleSwitch,
+  handleQualityChange,
+  handleNotification,
+  notification
+  }) => {
 
-  const { isConnected, masterVolume, soundQuality, handleVolumeChange, handleToggleSwitch, handleQualityChange, handleNotification, notification } = props;
 
   return (
     <div>
@@ -38,7 +44,6 @@ const Dashboard = (props) => {
         <Card 
           id="master-volume-card"
           variant="outlined"
-          boxShadow={2}
           sx={{minWidth: 275 }}>
           <CardContent>
             <h2>Master Volume</h2>
@@ -58,7 +63,6 @@ const Dashboard = (props) => {
         <Card 
           id="sound-quality-card"
           variant="outlined"
-          boxShadow={2}
           sx={{minWidth: 275 }}>
           <CardContent>
             <h2>Sound Quality</h2>
