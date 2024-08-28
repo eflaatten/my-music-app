@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardActions } from '@mui/material';
 import BasicSwitches from './BasicSwitches';
 import ContinuousSlider from './ContinuousSlider';
 import BasicSelect from './BasicSelect';
-import SystemNotifications from './SystemNotifications';
-
 
 const Dashboard = ({
   isConnected,
